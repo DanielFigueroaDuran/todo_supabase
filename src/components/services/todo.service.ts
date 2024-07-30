@@ -7,4 +7,14 @@ const getTodos = async (): Promise<Todo[]> => {
   return data;
 };
 
-export { getTodos };
+const deleteTodo = async (id: number) => {
+  const { error } = await supabase.from("Todo").delete().eq("id", id);
+  if (error) throw error;
+};
+
+const createTodo = async (title: string, description: string) => {
+  const { error } = await supabase.from("Todo").insert({ title, description });
+  if (error) throw error;
+};
+
+export { getTodos, deleteTodo, createTodo };

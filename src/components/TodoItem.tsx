@@ -2,12 +2,18 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
 
 interface Props {
+  id: number;
   title: string;
   description: string;
   isCompleted: boolean;
+  onDelete: (id: number) => void;
 }
 
-const TodoItem = ({ title, description, isCompleted }: Props) => {
+const TodoItem = ({ id, title, description, isCompleted, onDelete }: Props) => {
+  const handleOnPressDelete = () => {
+    onDelete(id);
+  };
+
   return (
     <div className="flex items-center gap-2 p-4 rounded-lg bg-slate-200">
       <input type="checkbox" checked={isCompleted} />
@@ -22,7 +28,10 @@ const TodoItem = ({ title, description, isCompleted }: Props) => {
           <button className="bg-blue-600 p-2 rounded-md active:scale-90">
             <CiEdit className=" text-white font-semibold" />
           </button>
-          <button className="bg-red-600 p-2 rounded-md active:scale-90">
+          <button
+            className="bg-red-600 p-2 rounded-md active:scale-90"
+            onClick={handleOnPressDelete}
+          >
             <RiDeleteBinLine className=" text-white font-semibold" />
           </button>
         </div>
