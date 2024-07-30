@@ -7,16 +7,33 @@ interface Props {
   description: string;
   isCompleted: boolean;
   onDelete: (id: number) => void;
+  onCheck: (id: number, newValue: boolean) => void;
 }
 
-const TodoItem = ({ id, title, description, isCompleted, onDelete }: Props) => {
+const TodoItem = ({
+  id,
+  title,
+  description,
+  isCompleted,
+  onDelete,
+  onCheck,
+}: Props) => {
   const handleOnPressDelete = () => {
     onDelete(id);
   };
 
+  const onCheckPress = () => {
+    onCheck(id, !isCompleted);
+  };
+
   return (
     <div className="flex items-center gap-2 p-4 rounded-lg bg-slate-200">
-      <input type="checkbox" checked={isCompleted} />
+      <input
+        type="checkbox"
+        checked={isCompleted}
+        readOnly
+        onClick={onCheckPress}
+      />
 
       <div className="flex justify-between flex-1 items-center">
         <div>
